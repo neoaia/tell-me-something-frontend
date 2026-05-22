@@ -1,7 +1,10 @@
 export interface Post {
+  id: string;
   recipient: string;
   content: string;
   dateCreated: string;
+  signature: string;
+  
 }
 
 export interface PaginationMetaDTO {

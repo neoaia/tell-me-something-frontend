@@ -1,4 +1,4 @@
-export interface Post {
+export interface PostInterface {
   id: string;
   recipient: string;
   content: string;
@@ -17,6 +17,6 @@ export interface PaginationMetaDTO {
 }
 
 export interface PostResponseDTO {
-  data: Post;
+  data: PostInterface;
   meta: PaginationMetaDTO;
 }

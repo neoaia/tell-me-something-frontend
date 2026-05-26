@@ -17,14 +17,14 @@ const BrowsePage = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center mx-auto min-h-screen max-w-4xl">
+    <>
       <Search
         value={searchValue}
         onChange={handleSearchChange}
         onSubmit={handleSubmit}
       />
       <PostsGrid posts={PostsData} />
-    </div>
+    </>
   );
 };
 

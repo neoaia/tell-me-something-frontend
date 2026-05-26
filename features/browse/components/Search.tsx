@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Button from "@/components/Button";
 
 interface SearchProps {
   value: string;
@@ -21,7 +22,7 @@ const Search = ({ value, onChange, onSubmit }: SearchProps) => {
         placeholder="Search for a name.."
         className="border border-gray-300 active:border-gray-600 p-4 rounded-2xl flex-1"
       />
-      <button className="bg-black text-white px-7 rounded-2xl">Search</button>
+      <Button label="Search" />
     </div>
   );
 };

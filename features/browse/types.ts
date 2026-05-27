@@ -4,7 +4,6 @@ export interface PostInterface {
   content: string;
   dateCreated: string;
   signature: string;
-  
 }
 
 export interface PaginationMetaDTO {

@@ -60,9 +60,25 @@ const BrowsePage = () => {
       />
 
       {isLoading ? (
-        <div className="text-gray-500">Loading posts..</div>
+        searchValue ? (
+          <>
+            <div className="text-gray-500">
+              Searching for &quot;{searchValue}&quot;
+            </div>
+            <div className="text-gray-500">Loading posts..</div>
+          </>
+        ) : (
+          <div className="text-gray-500">Loading posts..</div>
+        )
       ) : posts.length > 0 ? (
         <PostsGrid posts={posts} />
+      ) : searchValue ? (
+        <>
+          <div className="text-gray-500">
+            Searched for &quot;{searchValue}&quot;
+          </div>
+          <div className="text-gray-500">No posts yet.</div>
+        </>
       ) : (
         <div className="text-gray-500">No posts yet.</div>
       )}

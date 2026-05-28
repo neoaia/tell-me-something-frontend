@@ -8,6 +8,7 @@ import { handleAxiosError } from "@/utils/axiosErrorHandler";
 
 const BrowsePage = () => {
   const [searchValue, setSearchValue] = useState("");
+  const [searchDisplayValue, setSearchDisplayValue] = useState("");
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -29,6 +30,7 @@ const BrowsePage = () => {
     } finally {
       setIsLoading(false);
       setIsDisabled(false);
+      setSearchDisplayValue(searchValue);
     }
   };
 
@@ -76,7 +78,7 @@ const BrowsePage = () => {
       ) : searchValue ? (
         <>
           <div className="text-gray-500">
-            Searched for &quot;{searchValue}&quot;
+            Searched for &quot;{searchDisplayValue}&quot;
           </div>
           <div className="text-gray-500">No posts yet.</div>
         </>

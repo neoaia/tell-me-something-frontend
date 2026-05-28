@@ -4,6 +4,7 @@ import PostsGrid from "@/features/browse/components/PostsGrid";
 import Search from "../../features/browse/components/Search";
 import { useEffect, useState } from "react";
 import { browseService } from "@/features/browse";
+import { handleAxiosError } from "@/utils/axiosErrorHandler";
 
 const BrowsePage = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -40,7 +41,7 @@ const BrowsePage = () => {
 
         setPosts(response);
       } catch (error) {
-        console.log(error);
+        console.log(handleAxiosError(error));
       } finally {
         setIsLoading(false);
         setIsDisabled(false);

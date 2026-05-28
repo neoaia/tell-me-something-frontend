@@ -1,12 +1,12 @@
 import api from "@/lib/api";
 
 export const browseService = {
-    getPosts: async () => {
-        const response = await api.get("/posts");
-        return response.data;
-    },
+  getPosts: async (search = "") => {
+    const url = search ? `/posts?recipient=${search}` : "/posts";
+    const response = await api.get(url);
 
-    getPostById: async () => {
-        
-    }
-}
+    return response.data.data;
+  },
+
+  getPostById: async () => {},
+};

@@ -1,8 +1,8 @@
 export interface PostInterface {
-  id: string;
+  _id: string;
   recipient: string;
   content: string;
-  dateCreated: string;
+  createdAt: string;
   signature: string;
 }
 

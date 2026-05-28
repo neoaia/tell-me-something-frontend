@@ -8,9 +8,9 @@ interface PostGridProps {
 
 const PostsGrid = ({ posts }: PostGridProps) => {
   return (
-    <div className="grid grid-cols-1 gap-6 col-auto md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-6 col-auto md:grid-cols-2 w-full">
         {posts.map((post) => (
-            <PostItem key={post.id} post={post}/>
+            <PostItem key={post._id} post={post}/>
         ))}
     </div>
   );

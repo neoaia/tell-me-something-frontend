@@ -7,14 +7,14 @@ interface PostProps {
 }
 
 const PostItem = ({ post }: PostProps) => {
-  const dateObj = new Date(post.dateCreated);
+  const dateObj = new Date(post.createdAt);
 
   function handleClick(id: string) {
     console.log(`Post ${id} clicked!`);
   }
   return (
     <div
-      onClick={() => handleClick(post.id)}
+      onClick={() => handleClick(post._id)}
       className="text-md border-gray-200 font-sans border shadow-sm flex flex-col justify-between rounded-2xl overflow-hidden p-7 max-w-lg max-h-65 h-65 gap-7 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition"
     >
       <div>

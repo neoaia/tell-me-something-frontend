@@ -8,19 +8,43 @@ import { browseService } from "@/features/browse";
 const BrowsePage = () => {
   const [searchValue, setSearchValue] = useState("");
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleSearchChange = (value: string) => {
     setSearchValue(value);
   };
 
-  const handleSubmit = () => {
-    setSearchValue("");
+  const handleSubmit = async (searchValue: string) => {
+    setIsDisabled(true);
+    setIsLoading(true);
+
+    try {
+      const response = await browseService.getPosts(searchValue);
+
+      setPosts(response);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+      setIsDisabled(false);
+    }
   };
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await browseService.getPosts();
-      setPosts(response);
+      setIsDisabled(true);
+      setIsLoading(true);
+      try {
+        const response = await browseService.getPosts();
+
+        setPosts(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+        setIsDisabled(false);
+      }
     };
 
     fetchPosts();
@@ -32,8 +56,12 @@ const BrowsePage = () => {
         value={searchValue}
         onChange={handleSearchChange}
         onSubmit={handleSubmit}
+        isDisabled={isDisabled}
       />
-      {posts && posts.length > 0 ? (
+
+      {isLoading ? (
+        <div className="text-gray-500">Loading posts..</div>
+      ) : posts.length > 0 ? (
         <PostsGrid posts={posts} />
       ) : (
         <div className="text-gray-500">No posts yet.</div>

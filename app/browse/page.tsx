@@ -2,16 +2,38 @@
 
 import PostsGrid from "@/features/browse/components/PostsGrid";
 import Search from "../../features/browse/components/Search";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { browseService } from "@/features/browse";
-import { handleAxiosError } from "@/utils/axiosErrorHandler";
+import Button from "@/components/Button";
 
 const BrowsePage = () => {
   const [searchValue, setSearchValue] = useState("");
   const [searchDisplayValue, setSearchDisplayValue] = useState("");
   const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleRetry = async () => {
+    if (searchDisplayValue) {
+      handleSubmit(searchDisplayValue);
+    }
+
+    try {
+      const response = await browseService.getPosts();
+
+      setPosts(response);
+    } catch (error) {
+      setIsError(true);
+
+      const apiError = error as Error;
+      setErrorMessage(apiError.message);
+    } finally {
+      setIsLoading(false);
+      setIsDisabled(false);
+    }
+  };
 
   const handleSearchChange = (value: string) => {
     setSearchValue(value);
@@ -26,7 +48,10 @@ const BrowsePage = () => {
 
       setPosts(response);
     } catch (error) {
-      console.log(error);
+      setIsError(true);
+
+      const apiError = error as Error;
+      setErrorMessage(apiError.message);
     } finally {
       setIsLoading(false);
       setIsDisabled(false);
@@ -36,14 +61,15 @@ const BrowsePage = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      setIsDisabled(true);
-      setIsLoading(true);
       try {
         const response = await browseService.getPosts();
 
         setPosts(response);
       } catch (error) {
-        console.log(handleAxiosError(error));
+        setIsError(true);
+
+        const apiError = error as Error;
+        setErrorMessage(apiError.message);
       } finally {
         setIsLoading(false);
         setIsDisabled(false);
@@ -52,6 +78,53 @@ const BrowsePage = () => {
 
     fetchPosts();
   }, []);
+
+  const renderContent = () => {
+    if (isLoading) {
+      return (
+        <>
+          {searchValue && (
+            <div className="text-gray-500">
+              Searching for &quot;{searchValue}&quot;
+            </div>
+          )}
+          <div className="text-gray-500">Loading posts..</div>
+        </>
+      );
+    }
+
+    if (isError) {
+      return (
+        <>
+          <div className="text-gray-500">{errorMessage}</div>
+          <Button label="Retry" disabled={isDisabled} onClick={handleRetry} />
+        </>
+      );
+    }
+
+    const hasPosts = posts.length > 0;
+
+    if (searchDisplayValue) {
+      return (
+        <>
+          <div className="text-gray-500">
+            Searched for &quot;{searchDisplayValue}&quot;
+          </div>
+          {hasPosts ? (
+            <PostsGrid posts={posts} />
+          ) : (
+            <div className="text-gray-500">No posts yet.</div>
+          )}
+        </>
+      );
+    }
+
+    return hasPosts ? (
+      <PostsGrid posts={posts} />
+    ) : (
+      <div className="text-gray-500">No posts yet.</div>
+    );
+  };
 
   return (
     <>
@@ -62,29 +135,7 @@ const BrowsePage = () => {
         isDisabled={isDisabled}
       />
 
-      {isLoading ? (
-        searchValue ? (
-          <>
-            <div className="text-gray-500">
-              Searching for &quot;{searchValue}&quot;
-            </div>
-            <div className="text-gray-500">Loading posts..</div>
-          </>
-        ) : (
-          <div className="text-gray-500">Loading posts..</div>
-        )
-      ) : posts.length > 0 ? (
-        <PostsGrid posts={posts} />
-      ) : searchValue ? (
-        <>
-          <div className="text-gray-500">
-            Searched for &quot;{searchDisplayValue}&quot;
-          </div>
-          <div className="text-gray-500">No posts yet.</div>
-        </>
-      ) : (
-        <div className="text-gray-500">No posts yet.</div>
-      )}
+      {renderContent()}
     </>
   );
 };

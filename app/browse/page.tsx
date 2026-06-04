@@ -107,7 +107,7 @@ const BrowsePage = () => {
     if (searchDisplayValue) {
       return (
         <>
-          <div className="text-gray-500">
+          <div className="text-gray-500 mb-6">
             Searched for &quot;{searchDisplayValue}&quot;
           </div>
           {hasPosts ? (

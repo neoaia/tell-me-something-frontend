@@ -1,7 +1,9 @@
-export interface Post {
+export interface PostInterface {
+  _id: string;
   recipient: string;
   content: string;
-  dateCreated: string;
+  createdAt: string;
+  signature: string;
 }
 
 export interface PaginationMetaDTO {
@@ -14,6 +16,6 @@ export interface PaginationMetaDTO {
 }
 
 export interface PostResponseDTO {
-  data: Post;
+  data: PostInterface;
   meta: PaginationMetaDTO;
 }

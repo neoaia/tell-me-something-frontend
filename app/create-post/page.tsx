@@ -58,7 +58,7 @@ const CreatePage = () => {
     <>
       <form
         onSubmit={submitPost}
-        className="flex flex-col w-full max-w-4xl gap-5"
+        className="flex flex-col gap-5"
       >
         <input
           type="text"

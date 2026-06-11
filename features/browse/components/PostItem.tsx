@@ -1,16 +1,18 @@
 "use client";
 
 import { PostInterface } from "../types";
+import { dateHandler } from "@/utils/dateHandler";
 
 interface PostProps {
   post: PostInterface;
 }
 
 const PostItem = ({ post }: PostProps) => {
-  const dateObj = new Date(post.createdAt);
 
   function handleClick(id: string) {
-    console.log(`Post ${id} clicked!`);
+    console.log(`Navigating to Post ${id}`);
+
+    window.open(`/${id}`, "_blank", "noopener,noreferrer")
   }
   return (
     <div
@@ -31,7 +33,7 @@ const PostItem = ({ post }: PostProps) => {
 
       <div className=" flex flex-row justify-between items-center text-sm">
         <div className="text-gray-400">{post.signature}</div>
-        <div className="text-gray-400">{dateObj.toDateString()}</div>
+        <div className="text-gray-400">{dateHandler(post.createdAt)}</div>
       </div>
     </div>
   );

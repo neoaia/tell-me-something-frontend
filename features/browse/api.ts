@@ -11,7 +11,6 @@ export const browseService = {
     } 
     catch (error) {
       console.error(error);
-      throw error;
     }
   },
 
@@ -21,7 +20,7 @@ export const browseService = {
       const response = await api.get(url);
 
       console.log(response.data.message);
-      return response.data.post;
+      return response;
     }
     catch (error) {
       console.error(error);

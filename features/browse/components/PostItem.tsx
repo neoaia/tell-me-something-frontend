@@ -12,7 +12,7 @@ const PostItem = ({ post }: PostProps) => {
   function handleClick(id: string) {
     console.log(`Navigating to Post ${id}`);
 
-    window.open(`/${id}`, "_blank", "noopener,noreferrer")
+    window.open(`/post/${id}`, "_blank", "noopener,noreferrer")
   }
   return (
     <div

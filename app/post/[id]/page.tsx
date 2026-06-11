@@ -1,19 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PostInterface } from "../../features/browse/types";
+import { PostInterface } from "../../../features/browse/types";
 import { useParams } from "next/navigation";
 import { browseService } from "@/features/browse";
 import { dateHandler } from "@/utils/dateHandler";
 
 const PostPage = () => {
   const params = useParams();
-  const postId = params.post as string;
+  const postId = params.id as string;
 
   const [post, setPost] = useState<PostInterface>();
 
   useEffect(() => {
-    console.log(postId);
+    console.log("Post: ", postId);
 
     const fetchPost = async () => {
       try {

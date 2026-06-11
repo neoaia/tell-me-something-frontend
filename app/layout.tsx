@@ -10,8 +10,8 @@ const albertSans = AlbertSans({
 });
 
 export const metadata: Metadata = {
-  title: "tellmesomething",
-  description: "a place where you can voice out ur thoughts. :)",
+  title: "Tell Me Something",
+  description: "A place where you can voice out ur thoughts. :)",
 };
 
 export default function RootLayout({

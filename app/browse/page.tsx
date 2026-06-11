@@ -2,7 +2,7 @@
 
 import PostsGrid from "@/features/browse/components/PostsGrid";
 import Search from "../../features/browse/components/Search";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { browseService } from "@/features/browse";
 import Button from "@/components/Button";
 

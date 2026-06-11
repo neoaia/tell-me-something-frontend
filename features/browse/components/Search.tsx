@@ -11,7 +11,7 @@ interface SearchProps {
 
 const Search = ({ value, onChange, onSubmit, isDisabled }: SearchProps) => {
   return (
-    <div className="w-full my-7 flex flex-row gap-3">
+    <div className="w-full mb-7 flex flex-row gap-3">
       <input
         type="text"
         value={value}

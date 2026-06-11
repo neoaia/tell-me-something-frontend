@@ -56,30 +56,36 @@ const CreatePage = () => {
 
   return (
     <>
-      <form
-        onSubmit={submitPost}
-        className="flex flex-col gap-5"
-      >
-        <input
-          type="text"
-          value={recipient}
-          onChange={(e) => setRecipient(e.target.value)}
-          className={TAILWIND_DESIGNS.INPUT_BOX_DESIGN}
-          placeholder="Who's your recipient?"
-          maxLength={INPUT_LIMIT.RECIPIENT_LIMIT}
-        />
+      <div className="font-bold text-7xl mb-10">Post</div>
 
-        <textarea
-          id="message"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className={TAILWIND_DESIGNS.INPUT_BOX_DESIGN}
-          placeholder="Write your message.."
-          rows={10}
-          maxLength={INPUT_LIMIT.MESSAGE_LIMIT}
-        ></textarea>
+      <form onSubmit={submitPost} className="flex flex-col gap-5">
+        <div className="flex flex-col gap-2">
+          <div className="text-lg">Recipient</div>
+          <input
+            type="text"
+            value={recipient}
+            onChange={(e) => setRecipient(e.target.value)}
+            className={TAILWIND_DESIGNS.INPUT_BOX_DESIGN}
+            placeholder="Who is this for?"
+            maxLength={INPUT_LIMIT.RECIPIENT_LIMIT}
+          />
+        </div>
 
-        <div className="flex flex-row gap-3">
+        <div className="flex flex-col gap-2">
+          <div className="text-lg">Message</div>
+          <textarea
+            id="message"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            className={TAILWIND_DESIGNS.INPUT_BOX_DESIGN}
+            placeholder="Write your message.."
+            rows={10}
+            maxLength={INPUT_LIMIT.MESSAGE_LIMIT}
+          ></textarea>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <div className="text-lg">Signature</div>
           <input
             value={signature}
             onChange={(e) => setSignature(e.target.value)}
@@ -88,13 +94,9 @@ const CreatePage = () => {
             placeholder="What's your codename? ;)"
             maxLength={INPUT_LIMIT.SIGNATURE_LIMIT}
           />
-
-          <Button
-            label="Submit Post"
-            type="submit"
-            disabled={!isPostComplete}
-          />
         </div>
+
+        <Button label="Submit Post" type="submit" disabled={!isPostComplete} />
       </form>
     </>
   );

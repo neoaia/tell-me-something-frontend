@@ -20,7 +20,7 @@ const Search = ({ value, onChange, onSubmit, isDisabled }: SearchProps) => {
           if (e.key === "Enter") onSubmit?.(value);
         }}
         placeholder="Search for a name.."
-        className="border border-gray-300 active:border-gray-600 px-7 py-4 rounded-2xl flex-1"
+        className="border border-gray-300 active:border-gray-600 px-5 py-4 rounded-2xl flex-1"
         disabled={isDisabled}
       />
       <Button

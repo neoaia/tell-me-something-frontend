@@ -107,13 +107,15 @@ const BrowsePage = () => {
     if (searchDisplayValue) {
       return (
         <>
-          <div className="text-gray-500 mb-6">
-            Searched for &quot;{searchDisplayValue}&quot;
-          </div>
           {hasPosts ? (
-            <PostsGrid posts={posts} />
+            <>
+              <div className="text-gray-500 ml-2 mb-6">
+                Searched for &quot;{searchDisplayValue}&quot;
+              </div>
+              <PostsGrid posts={posts} />
+            </>
           ) : (
-            <div className="text-gray-500">No posts yet.</div>
+            <div className="text-gray-500 ml-2 ">No posts yet.</div>
           )}
         </>
       );
@@ -122,12 +124,13 @@ const BrowsePage = () => {
     return hasPosts ? (
       <PostsGrid posts={posts} />
     ) : (
-      <div className="text-gray-500">No posts yet.</div>
+      <div className="text-gray-500 ml-2 ">No posts yet.</div>
     );
   };
 
   return (
     <>
+      <div className="font-bold text-7xl mb-7">Browse</div>
       <Search
         value={searchValue}
         onChange={handleSearchChange}

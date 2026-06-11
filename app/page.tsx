@@ -1,11 +1,9 @@
 import Link from "next/link";
 
 const Home = () => {
-  const navOptions = [
-    { id: 1, title: "Go to Home", path: "/" },
+  const navOptions = [ 
     { id: 2, title: "Create a Post", path: "/create-post" },
-    { id: 3, title: "Browse Posts", path: "/browse" },
-    { id: 4, title: "View a Post", path: "/post" },
+    { id: 3, title: "Browse Posts", path: "/browse" }, 
   ];
 
   return (

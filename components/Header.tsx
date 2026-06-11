@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const Header = () => {
   const navOptions = [
-    { id: 2, title: "Create a Post", path: "/create-post" },
-    { id: 3, title: "Browse Posts", path: "/browse" },
+    { id: 2, title: "Post", path: "/create-post" },
+    { id: 3, title: "Browse", path: "/browse" },
   ];
 
   return (
@@ -16,7 +16,7 @@ const Header = () => {
         <div className="flex flex-row justify-evenly">
           {navOptions.map((button) => (
             <Link
-              className="p-2 mr-2 text-gray-400 hover:text-black transition"
+              className="p-2 mr-3 text-gray-400 hover:text-black transition"
               key={button.id}
               href={button.path}
             >
